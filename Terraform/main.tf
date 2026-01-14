@@ -11,7 +11,7 @@ resource "aws_security_group" "telco_sg" {
   name        = "telco_sg"
   vpc_id = data.aws_vpc.default.id
 
-  ingress {
+   ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
@@ -19,8 +19,8 @@ resource "aws_security_group" "telco_sg" {
   }
 
   ingress {
-    from_port   = 9090
-    to_port     = 9090
+    from_port   = 30000
+    to_port     = 32767
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -34,7 +34,7 @@ resource "aws_security_group" "telco_sg" {
 }
 
 resource "aws_instance" "Demo" {
-  ami           = "ami-0e3addcf2a4624dfb"
+  ami           = "ami-0798822fa339c5ab3" 
   instance_type = "t3.small"
   key_name = "test"
 

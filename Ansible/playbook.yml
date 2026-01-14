@@ -11,38 +11,29 @@
       apt:
         name:
           - curl
-          - apt-transport-https
-        state: present
-
-    - name: Install Docker
-      apt:
-        name: docker.io
+          - docker.io
         state: present
 
     - name: Start and enable Docker
       systemd:
         name: docker
-        enabled: yes
         state: started
+        enabled: yes
 
     - name: Add ubuntu user to docker group
       user:
         name: ubuntu
         groups: docker
         append: yes
-    - name: Set hostname to telco-node
-      hostname:
-        name: telco-node
 
-    - name: Install k3s Kubernetes
-      shell: |
-        curl -sfL https://get.k3s.io | sh -
+    - name: Install k3s
+      shell: curl -sfL https://get.k3s.io | sh -
       args:
         creates: /usr/local/bin/k3s
 
-    - name: Wait for k3s to be ready
+    - name: Wait for Kubernetes to be ready
       shell: |
-        until kubectl get nodes >/dev/null 2>&1; do
+        until kubectl get nodes; do
           sleep 5
         done
       environment:
@@ -55,7 +46,7 @@
         group: ubuntu
         mode: "0644"
 
-    - name: Verify Kubernetes node status
+    - name: Verify Kubernetes node
       shell: kubectl get nodes
       environment:
         KUBECONFIG: /etc/rancher/k3s/k3s.yaml

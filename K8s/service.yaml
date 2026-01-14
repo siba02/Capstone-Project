@@ -7,6 +7,6 @@ spec:
   selector:
     app: telcocloud-network
   ports:
-    - port: 5000
-      targetPort: 5000
-      nodePort: 9090
+    - port: 80
+      targetPort: 80
+      nodePort: 30909
