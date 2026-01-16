@@ -23,4 +23,4 @@ kubectl get svc telcocloud-network-service
 
 echo " Deployment completed successfully!"
 echo " Access your application at:"
-echo " http://<EC2_PUBLIC_IP>:30909"
+echo "   http://<EC2_PUBLIC_IP>:30909"
