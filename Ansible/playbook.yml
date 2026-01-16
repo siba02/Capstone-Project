@@ -26,8 +26,9 @@
         groups: docker
         append: yes
 
-    - name: Install k3s
-      shell: curl -sfL https://get.k3s.io | sh -
+    - name: Install k3s using Docker runtime
+      shell: |
+        curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--docker" sh -
       args:
         creates: /usr/local/bin/k3s
 
@@ -45,6 +46,29 @@
         owner: ubuntu
         group: ubuntu
         mode: "0644"
+    - name: Copy application files
+      copy:
+        src: ../app/
+        dest: /home/ubuntu/app/
+        owner: ubuntu
+        group: ubuntu
+        mode: "0755"
+
+    - name: Copy Kubernetes manifests
+      copy:
+        src: ../k8s/
+        dest: /home/ubuntu/K8s/
+        owner: ubuntu
+        group: ubuntu
+        mode: "0755"
+
+    - name: Copy deploy script
+      copy:
+        src: ../deploy.sh
+        dest: /home/ubuntu/deploy.sh
+        owner: ubuntu
+        group: ubuntu
+        mode: "0755"
 
     - name: Verify Kubernetes node
       shell: kubectl get nodes
