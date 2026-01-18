@@ -12,6 +12,7 @@ resource "aws_security_group" "telco_sg" {
   vpc_id = data.aws_vpc.default.id
 
    ingress {
+    description = "SSH"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
@@ -19,6 +20,7 @@ resource "aws_security_group" "telco_sg" {
   }
 
   ingress {
+    description = "Kubernetes NodePort range"
     from_port   = 30000
     to_port     = 32767
     protocol    = "tcp"
@@ -46,6 +48,7 @@ resource "aws_instance" "Demo" {
   associate_public_ip_address = true
   tags = {
     Name = "Demo"
+    Role = "telcocloud"
   }
 
 

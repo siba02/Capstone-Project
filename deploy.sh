@@ -10,7 +10,7 @@ IMAGE_NAME="telcocloud-network-app"
 
 echo " Building Docker image..."
 cd "$APP_DIR"
-docker build -t "$IMAGE_NAME" .
+sudo docker build -t "$IMAGE_NAME" .
 
 echo " Deploying to Kubernetes..."
 kubectl apply -f "$K8S_DIR"

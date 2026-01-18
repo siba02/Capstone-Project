@@ -1,5 +1,5 @@
 - name: Configure TelcoCloud Node
-  hosts: telcocloud
+  hosts: _telcocloud
   become: yes
 
   tasks:
@@ -46,9 +46,10 @@
         owner: ubuntu
         group: ubuntu
         mode: "0644"
+
     - name: Copy application files
       copy:
-        src: ../app/
+        src: "{{ playbook_dir }}/../app/"
         dest: /home/ubuntu/app/
         owner: ubuntu
         group: ubuntu
@@ -56,7 +57,7 @@
 
     - name: Copy Kubernetes manifests
       copy:
-        src: ../k8s/
+        src: "{{ playbook_dir }}/../K8s/"
         dest: /home/ubuntu/K8s/
         owner: ubuntu
         group: ubuntu
@@ -64,7 +65,7 @@
 
     - name: Copy deploy script
       copy:
-        src: ../deploy.sh
+        src: "{{ playbook_dir }}/../deploy.sh"
         dest: /home/ubuntu/deploy.sh
         owner: ubuntu
         group: ubuntu
