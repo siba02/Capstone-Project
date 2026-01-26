@@ -36,8 +36,8 @@ resource "aws_security_group" "telco_sg" {
 }
 
 resource "aws_instance" "Demo" {
-  ami           = "ami-0798822fa339c5ab3" 
-  instance_type = "t3.small"
+  ami           = "ami-088e3774a557a94ed" 
+  instance_type = "c7i-flex.large"
   key_name = "test"
 
   #  subnet_id              = "subnet-0f293e5bc184e7692"
